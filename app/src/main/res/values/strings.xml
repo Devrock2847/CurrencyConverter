@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="textview">TextView</string>
+    <string-array name="CurrenciesOne">
+        <item>GBP</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>AUD</item>
+    </string-array>
+    <string-array name="CurrenciesTwo">
+        <item>USD</item>
+        <item>GBP</item>
+        <item>EUR</item>
+        <item>AUD</item>
+    </string-array>
+</resources>
