@@ -28,23 +28,15 @@ class MainActivity : AppCompatActivity() {
     var baseCurrencyTwo = "USD"
     var conversionRate = 0f
     var apiKey = "325b56c003ec0e19ce02de94"
-    //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
-
     private lateinit var binding: ActivityMainBinding
-    //val API_URL = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
-    //val API_URL = "https://v6.exchangerate-api.com/v6/325b56c003ec0e19ce02de94/latest/GBP"
 
-    val thread = Thread {}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //setContentView(R.layout.activity_main)
         spinnerSetup()
-        //textChangedStuff()
     }
-
     fun getApiResult(view: View) {
         val thread = Thread {
             var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
@@ -98,12 +90,10 @@ class MainActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerFrom.adapter = adapter
         }
-
         ArrayAdapter.createFromResource(this, R.array.CurrenciesTwo, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerTo.adapter = adapter
         }
-        //AdapterView was imported here, remove if not working
         spinnerFrom.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -111,10 +101,8 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 baseCurrencyOne = parent?.getItemAtPosition(position).toString()
                 Log.d("Main", baseCurrencyOne)
-                //getApiResult()
             }
         })
-        //AdapterView was imported here, remove if not working
         spinnerTo.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -122,8 +110,6 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 baseCurrencyTwo = parent?.getItemAtPosition(position).toString()
                 Log.d("Main", baseCurrencyTwo)
-                //retrieve api information here
-                //getApiResult()
             }
         })
     }
