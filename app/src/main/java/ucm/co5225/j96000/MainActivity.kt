@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 baseCurrencyOne = parent?.getItemAtPosition(position).toString()
                 Log.d("Main", baseCurrencyOne)
