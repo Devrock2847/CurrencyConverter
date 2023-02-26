@@ -19,10 +19,10 @@ import java.net.URL
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    var baseCurrencyOne = "GBP"
-    var baseCurrencyTwo = "USD"
-    var conversionRate = 0f
-    var apiKey = "325b56c003ec0e19ce02de94"
+    private var baseCurrencyOne = "GBP"
+    private var baseCurrencyTwo = "USD"
+    private var conversionRate = 0f
+    private var apiKey = "325b56c003ec0e19ce02de94"
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
