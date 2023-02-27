@@ -13,10 +13,4 @@
         <item>EUR</item>
         <item>AUD</item>
     </string-array>
-    <string-array name="definitions">
-        <item>GBP - Great British Pound</item>
-        <item>USD - United States Dollar</item>
-        <item>EUR - Euro</item>
-        <item>AUD - Australian Dollar</item>
-    </string-array>
 </resources>
