@@ -2,8 +2,6 @@ package ucm.co5225.j96000
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -13,10 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ucm.co5225.j96000.databinding.ActivityMainBinding
 import org.json.JSONObject
-import java.io.IOException
-import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var baseCurrencyOne = "GBP"
@@ -30,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        spinnerSetup()
+        buildSpinner()
     }
     fun getApiResult(view: View) {
         val thread = Thread {
@@ -46,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     GlobalScope.launch(Dispatchers.IO) {
                         try {
+                            //attempts to read from the api
                             val apiResult = URL(API).readText()
                             val jsonObject = JSONObject(apiResult)
 
@@ -54,9 +50,10 @@ class MainActivity : AppCompatActivity() {
                             if (conversionRate != null) {
                                 binding.textView2.text = conversionRate.toString()
                             }
-                            Log.d("Main", "$conversionRate")
-                            Log.d("Main", apiResult)
-
+                            //Log.d("Main", "$conversionRate")
+                            //Log.d("Main", apiResult)
+                            //this Coroutine takes the data from the input boss and multiplies it
+                            //by the conversion rate and displays inside the output box
                             withContext(Dispatchers.Main) {
                                 val text = ((binding.editTextConversionFrom.text.toString()
                                     .toFloat()) * conversionRate).toString()
@@ -64,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                                     binding.editTextConversionTo?.setText(text)
                                 }
                             }
+                            //errors if there is an issue with the api connection
                         } catch (e: Exception) {
                             Log.e("Main", "$e")
                         }
@@ -74,13 +72,14 @@ class MainActivity : AppCompatActivity() {
         thread.start()
     }
     fun clearTextView(view: View) {
+        //functionality for the clear button
         binding.editTextConversionTo.setText("")
         binding.editTextConversionFrom.setText("")
     }
-    private fun spinnerSetup() {
+    private fun buildSpinner() {
         val spinnerFrom: Spinner = findViewById(R.id.spinnerConversionFrom)
         val spinnerTo: Spinner = findViewById(R.id.spinnerConversionTo)
-
+        //creates spinners and populates them with arrays stored in strings.xml page
         ArrayAdapter.createFromResource(this, R.array.CurrenciesOne, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerFrom.adapter = adapter
@@ -89,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerTo.adapter = adapter
         }
+        //when selected assigns the baseCurrency variables with the value selected
         spinnerFrom.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
