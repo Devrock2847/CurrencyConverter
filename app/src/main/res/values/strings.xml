@@ -8,15 +8,15 @@
     <string name="to">To</string>
     <string name="from">From</string>
     <string-array name="CurrenciesOne">
-        <item>(BTC) Bitcoin </item>
-        <item>USD</item>
-        <item>EUR</item>
-        <item>AUD</item>
+        <item>(BTC) Bitcoin</item>
+        <item>(ETH) Ethereum</item>
+        <item>(TRX) TRON</item>
+        <item>(DOT) Polkadot</item>
     </string-array>
     <string-array name="CurrenciesTwo">
-        <item>eth</item>
-        <item>GBP</item>
-        <item>EUR</item>
-        <item>AUD</item>
+        <item>(ETH) Ethereum</item>
+        <item>(BTC) Bitcoin</item>
+        <item>(TRX) TRON</item>
+        <item>(DOT) Polkadot</item>
     </string-array>
 </resources>
