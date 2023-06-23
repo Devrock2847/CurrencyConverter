@@ -86,6 +86,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                         if (conversionRate != null) { binding.textView2.text = conversionRate.toString() }
                         //End the API call here
                         } catch (e: Exception) {
+                            //Add API fail notification to user
                             Log.e("Main", "$e")
                         }
                 }
