@@ -17,9 +17,11 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     private var baseCurrencyTwo = "eth"
     private var conversionRateOne = 0f
     private var conversionRateTwo = 0f
+    private var conversionRate = 0f
+    private val api = "https://api.coingecko.com/api/v3/exchange_rates"
     //private var apiKey = "325b56c003ec0e19ce02de94"
-    lateinit var buttonConvert : Button
-    lateinit var buttonClear : Button
+    private lateinit var buttonConvert : Button
+    private lateinit var buttonClear : Button
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +45,12 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
             }
         }
     }
-    fun getApiResult(view: View) {
+    private fun getApiResult(view: View) {
         disableButton(buttonConvert)
 
         val thread = Thread {
             //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
-            var API = "https://api.coingecko.com/api/v3/exchange_rates"
+
 
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
@@ -63,17 +65,16 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     //GlobalScope.async(Dispatchers.IO) {
                     try {
                         //attempts to read from the api
-                        val apiResult = URL(API).readText()
+                        val apiResult = URL(api).readText()
                         val jsonObject = JSONObject(apiResult)
-                        //var fromCoin = jsonObject.getString()
                         //pulls the conversion rate from the api call object
                         conversionRateOne = jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne").getString("value").toFloat()
                         conversionRateTwo = jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo").getString("value").toFloat()
-                        var conversionRate = conversionRateOne / conversionRateTwo * 100
-                        Log.d("Main", "$conversionRateOne")
-                        Log.d("Main", "$conversionRateTwo")
-                        Log.d("Main", "$conversionRate")
-                        Log.d("Main", apiResult)
+                        conversionRate = conversionRateOne / conversionRateTwo * 100
+                        //Log.d("Main", "$conversionRateOne")
+                        //Log.d("Main", "$conversionRateTwo")
+                        //Log.d("Main", "$conversionRate")
+                        //Log.d("Main", apiResult)
                         //this Coroutine takes the data from the input boss and multiplies it
                         //by the conversion rate and displays inside the output box
 

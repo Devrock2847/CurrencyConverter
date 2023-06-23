@@ -8,7 +8,7 @@
     <string name="to">To</string>
     <string name="from">From</string>
     <string-array name="CurrenciesOne">
-        <item>btc</item>
+        <item>(BTC) Bitcoin </item>
         <item>USD</item>
         <item>EUR</item>
         <item>AUD</item>
