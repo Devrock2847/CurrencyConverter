@@ -50,15 +50,12 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
 
     }
     fun getApiResult(view: View) {
-        //val conversionRateCheck = conversionRate
-        //val isTrue = false
         disableButton(buttonConvert)
+
         val thread = Thread {
             //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
             var API = "https://api.coingecko.com/api/v3/exchange_rates"
-            //var APIone = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=$baseCurrencyOne"
-            //var APItwo = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=$baseCurrencyTwo"
-            //var API = "https://apiv2.bitcoinaverage.com/convert/NTc1NzgzNzlkMjcwNGE3NzgwMDUxOTcwOTU0Y2NhMGQ?from=$baseCurrencyOne&to=$baseCurrencyTwo&amount=1"
+
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
                 if (baseCurrencyOne == baseCurrencyTwo) {
@@ -87,7 +84,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                         //by the conversion rate and displays inside the output box
 
                         val text = ((binding.editTextConversionFrom.text.toString().toFloat()) * conversionRate).toString()
-
                         binding.editTextConversionTo?.setText(text)
 
                         if (conversionRate != null) { binding.textView2.text = conversionRate.toString() }
