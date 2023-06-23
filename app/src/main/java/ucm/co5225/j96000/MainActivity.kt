@@ -100,10 +100,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         }
         thread.start()
         enableButton(buttonConvert)
-
-        //if(conversionRateCheck != conversionRate) {
-        //if (conversionRate != conversionRateCheck) { thread.interrupt() }
-        //thread.start()
     }
     private fun clearTextView(view: View) {
         //functionality for the clear button
