@@ -33,21 +33,15 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         buttonClear = binding.clearButton
         buttonClear.setOnClickListener(this)
     }
-
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.convertButton->{
                 getApiResult(view)
             }
             R.id.clearButton->{
-                disableButton(buttonClear)
                 clearTextView(view)
-                enableButton(buttonClear)
             }
         }
-    }
-    fun buildThread() {
-
     }
     fun getApiResult(view: View) {
         disableButton(buttonConvert)
@@ -99,8 +93,10 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     }
     private fun clearTextView(view: View) {
         //functionality for the clear button
+        disableButton(buttonClear)
         binding.editTextConversionTo.setText("")
         binding.editTextConversionFrom.setText("")
+        enableButton(buttonClear)
     }
     private fun disableButton(button: Button) {
         button?.isEnabled = false
