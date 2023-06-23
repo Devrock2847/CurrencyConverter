@@ -120,7 +120,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         button?.setTextColor(ContextCompat.getColor(button.context, R.color.white))
         button?.setBackgroundColor(ContextCompat.getColor(button.context, R.color.purple_700))
     }
-
     private fun buildSpinner(view: View) {
         val spinnerFrom: Spinner = binding.spinnerConversionFrom
         //val spinnerTo: Spinner = findViewById(R.id.spinnerConversionTo)
