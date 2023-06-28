@@ -14,10 +14,10 @@
         android:layout_height="197dp"
         android:layout_centerInParent="true"
 
-        android:layout_marginStart="23dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="91dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="101dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="102dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/convertButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,14 +101,14 @@
         android:id="@+id/convertButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="19dp"
         android:background="@color/purple_700"
         android:text="@string/convert"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewWarning"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
 
     <TextView
         android:id="@+id/textView2"
@@ -124,13 +124,25 @@
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
         android:background="@color/purple_700"
         android:text="@string/clear"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/textViewWarning"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
+
+    <TextView
+        android:id="@+id/textViewWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="298dp"
+        android:text="Please select a currency to convert!"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

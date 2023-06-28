@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
 import ucm.co5225.j96000.databinding.ActivityMainBinding
@@ -35,6 +36,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         buttonConvert.setOnClickListener(this)
         buttonClear = binding.clearButton
         buttonClear.setOnClickListener(this)
+        clearTextView(binding.textViewWarning)
     }
     override fun onClick(view: View?) {
         when(view?.id){
@@ -55,42 +57,51 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
                 if (baseCurrencyOne == baseCurrencyTwo) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Please pick a currency to convert",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    //runOnUiThread(binding.textViewWarning.setText("Please select a currency to convert"))
+                    //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
-                    //Originally not async
-                    //GlobalScope.async(Dispatchers.IO) {
-                    try {
-                        //attempts to read from the api
-                        val apiResult = URL(api).readText()
-                        val jsonObject = JSONObject(apiResult)
-                        //pulls the conversion rate from the api call object
-                        conversionRateOne = jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne").getString("value").toFloat()
-                        conversionRateTwo = jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo").getString("value").toFloat()
-                        conversionRate = conversionRateOne / conversionRateTwo * 100
+                        clearTextView(binding.textViewWarning)
 
-                        //Log.d("Main", "$conversionRateOne")
-                        //Log.d("Main", "$conversionRateTwo")
-                        //Log.d("Main", "$conversionRate")
-                        //Log.d("Main", apiResult)
-                        //this Coroutine takes the data from the input boss and multiplies it
-                        //by the conversion rate and displays inside the output box
+                        //clearTextView(binding.textViewWarning)
+                        //Originally not async
+                        //GlobalScope.async(Dispatchers.IO) {
+                        try {
+                            //attempts to read from the api
+                            val apiResult = URL(api).readText()
+                            val jsonObject = JSONObject(apiResult)
+                            //pulls the conversion rate from the api call object
+                            conversionRateOne =
+                                jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
+                                    .getString("value").toFloat()
+                            conversionRateTwo =
+                                jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
+                                    .getString("value").toFloat()
+                            conversionRate = conversionRateOne / conversionRateTwo * 100
 
-                        val text = ((binding.editTextConversionFrom.text.toString().toFloat()) * conversionRate).toString()
-                        binding.editTextConversionTo?.setText(text)
+                            //Log.d("Main", "$conversionRateOne")
+                            //Log.d("Main", "$conversionRateTwo")
+                            //Log.d("Main", "$conversionRate")
+                            //Log.d("Main", apiResult)
+                            //this Coroutine takes the data from the input boss and multiplies it
+                            //by the conversion rate and displays inside the output box
 
-                        if (conversionRate != null) { binding.textView2.text = conversionRate.toString() }
-                        //End the API call here
+                            val text = ((binding.editTextConversionFrom.text.toString()
+                                .toFloat()) * conversionRate).toString()
+                            binding.editTextConversionTo?.setText(text)
+
+                            if (conversionRate != null) {
+                                binding.textView2.text = conversionRate.toString()
+                            }
+                            //End the API call here
                         } catch (e: Exception) {
                             //Add API fail notification to user
                             Log.e("Main", "$e")
                         }
+                    }
                 }
             }
-        }
+
+
         thread.start()
         enableButton(buttonConvert)
     }
