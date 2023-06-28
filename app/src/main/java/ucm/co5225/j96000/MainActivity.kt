@@ -20,12 +20,9 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     private var conversionRateTwo = 0f
     private var conversionRate = 0f
     private val api = "https://api.coingecko.com/api/v3/exchange_rates"
-    //private var apiKey = "325b56c003ec0e19ce02de94"
     private lateinit var buttonConvert : Button
     private lateinit var buttonClear : Button
     private lateinit var binding: ActivityMainBinding
-    //private var spareString = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -36,7 +33,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         buttonConvert.setOnClickListener(this)
         buttonClear = binding.clearButton
         buttonClear.setOnClickListener(this)
-        //clearTextView(binding.textViewWarning)
     }
     override fun onClick(view: View?) {
         when(view?.id){
