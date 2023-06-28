@@ -52,7 +52,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         val thread = Thread {
             //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
 
-
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
                 if (baseCurrencyOne == baseCurrencyTwo) {
