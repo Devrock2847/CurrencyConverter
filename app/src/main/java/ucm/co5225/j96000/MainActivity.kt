@@ -62,44 +62,37 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     }
                     //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
-                    //runOnUiThread {
-                    //    clearTextView(binding.textViewWarning)
-                    //}
-                        //Originally not async
-                        //GlobalScope.async(Dispatchers.IO) {
-                        //try {
-                            //clearTextView(binding.textViewWarning)
-                            //attempts to read from the api
-                            val apiResult = URL(api).readText()
-                            val jsonObject = JSONObject(apiResult)
-                            //pulls the conversion rate from the api call object
-                            conversionRateOne =
-                                jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
-                                    .getString("value").toFloat()
-                            conversionRateTwo =
-                                jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
-                                    .getString("value").toFloat()
-                            conversionRate = conversionRateOne / conversionRateTwo * 100
+                        //attempts to read from the api
+                        val apiResult = URL(api).readText()
+                        val jsonObject = JSONObject(apiResult)
+                        //pulls the conversion rate from the api call object
+                        conversionRateOne =
+                            jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
+                                .getString("value").toFloat()
+                        conversionRateTwo =
+                            jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
+                                .getString("value").toFloat()
+                        conversionRate = conversionRateOne / conversionRateTwo * 100
 
-                            //Log.d("Main", "$conversionRateOne")
-                            //Log.d("Main", "$conversionRateTwo")
-                            //Log.d("Main", "$conversionRate")
-                            //Log.d("Main", apiResult)
-                            //this Coroutine takes the data from the input boss and multiplies it
-                            //by the conversion rate and displays inside the output box
-                            runOnUiThread() {
-                                if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
-                                    clearTextView(binding.textViewWarning)
-                                } else {
-                                    val text = ((binding.editTextConversionFrom.text.toString()
-                                        .toFloat()) * conversionRate).toString()
-                                    binding.editTextConversionTo?.setText(text)
+                        //Log.d("Main", "$conversionRateOne")
+                        //Log.d("Main", "$conversionRateTwo")
+                        //Log.d("Main", "$conversionRate")
+                        //Log.d("Main", apiResult)
+                        //this Coroutine takes the data from the input boss and multiplies it
+                        //by the conversion rate and displays inside the output box
+                        runOnUiThread() {
+                            if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
+                                clearTextView(binding.textViewWarning)
+                            } else {
+                                val text = ((binding.editTextConversionFrom.text.toString()
+                                    .toFloat()) * conversionRate).toString()
+                                binding.editTextConversionTo?.setText(text)
 
-                                    if (conversionRate != null) {
-                                        binding.textView2.text = conversionRate.toString()
-                                    }
+                                if (conversionRate != null) {
+                                    binding.textView2.text = conversionRate.toString()
                                 }
                             }
+                        }
                             //Thread.sleep(500)
                         //} catch (e: Exception) {
                             //Add API fail notification to user
