@@ -36,7 +36,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         buttonConvert.setOnClickListener(this)
         buttonClear = binding.clearButton
         buttonClear.setOnClickListener(this)
-        clearTextView(binding.textViewWarning)
+        //clearTextView(binding.textViewWarning)
     }
     override fun onClick(view: View?) {
         when(view?.id){
@@ -50,22 +50,25 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     }
     private fun getApiResult(view: View) {
         disableButton(buttonConvert)
-
         val thread = Thread {
-            //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
+        //this@MainActivity.runOnUiThread(java.lang.Runnable {
 
+            //var API = "https://v6.exchangerate-api.com/v6/$apiKey/pair/$baseCurrencyOne/$baseCurrencyTwo"
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
                 if (baseCurrencyOne == baseCurrencyTwo) {
-                    //runOnUiThread(binding.textViewWarning.setText("Please select a currency to convert"))
+                    runOnUiThread {
+                        binding.textViewWarning.text = "Please select a currency to convert"
+                    }
                     //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
-                        clearTextView(binding.textViewWarning)
-
-                        //clearTextView(binding.textViewWarning)
+                    //runOnUiThread {
+                    //    clearTextView(binding.textViewWarning)
+                    //}
                         //Originally not async
                         //GlobalScope.async(Dispatchers.IO) {
-                        try {
+                        //try {
+                            //clearTextView(binding.textViewWarning)
                             //attempts to read from the api
                             val apiResult = URL(api).readText()
                             val jsonObject = JSONObject(apiResult)
@@ -84,25 +87,29 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                             //Log.d("Main", apiResult)
                             //this Coroutine takes the data from the input boss and multiplies it
                             //by the conversion rate and displays inside the output box
+                            runOnUiThread() {
+                                if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
+                                    clearTextView(binding.textViewWarning)
+                                } else {
+                                    val text = ((binding.editTextConversionFrom.text.toString()
+                                        .toFloat()) * conversionRate).toString()
+                                    binding.editTextConversionTo?.setText(text)
 
-                            val text = ((binding.editTextConversionFrom.text.toString()
-                                .toFloat()) * conversionRate).toString()
-                            binding.editTextConversionTo?.setText(text)
-
-                            if (conversionRate != null) {
-                                binding.textView2.text = conversionRate.toString()
+                                    if (conversionRate != null) {
+                                        binding.textView2.text = conversionRate.toString()
+                                    }
+                                }
                             }
-                            //End the API call here
-                        } catch (e: Exception) {
+                            //Thread.sleep(500)
+                        //} catch (e: Exception) {
                             //Add API fail notification to user
-                            Log.e("Main", "$e")
-                        }
+                            //Log.e("Main", "$e")
+                        //}
                     }
                 }
             }
-
-
         thread.start()
+        Thread.sleep(500)
         enableButton(buttonConvert)
     }
     private fun clearTextView(view: View) {

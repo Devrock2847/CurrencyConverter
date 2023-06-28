@@ -11,13 +11,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="197dp"
+        android:layout_height="198dp"
         android:layout_centerInParent="true"
 
         android:layout_marginStart="22dp"
         android:layout_marginTop="91dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="102dp"
+        android:layout_marginBottom="101dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/convertButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,62 +87,61 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="11dp"
         android:text="@string/conversion_rate"
         android:textSize="26sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/clearButton"
         app:layout_constraintTop_toBottomOf="@+id/convertButton" />
 
     <Button
         android:id="@+id/convertButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:background="@color/purple_700"
         android:text="@string/convert"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewWarning"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/clearButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
         android:text="@string/_0_000"
-        android:textSize="26sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="11dp"
         android:background="@color/purple_700"
         android:text="@string/clear"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewWarning"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWarning" />
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textViewWarning" />
 
     <TextView
         android:id="@+id/textViewWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="298dp"
-        android:text="Please select a currency to convert!"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
