@@ -53,40 +53,43 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         val thread = Thread {
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
+                runOnUiThread {
+                    binding.textViewWarning.text = "Please enter a value to convert"
+                    enableButton(buttonConvert)
+                }
                 if (baseCurrencyOne == baseCurrencyTwo) {
                     runOnUiThread {
                         binding.textViewWarning.text = "Please select a currency to convert"
                         enableButton(buttonConvert)
                     }
-                    //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
                     try {
-                        //attempts to read from the api
+                        //Attempts to read from the API
                         val apiResult = URL(api).readText()
                         val jsonObject = JSONObject(apiResult)
-                        //Log.d("fail", "fail on $response")
-                        //pulls the conversion rate from the api call object
+                        //Pulls the selected conversion rate from the api call object
                         conversionRateOne =
                             jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
                                 .getString("value").toFloat()
                         conversionRateTwo =
                             jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
                                 .getString("value").toFloat()
+                        //Calculates the conversion rate of the 2 values
                         conversionRate = conversionRateOne / conversionRateTwo * 10
                         //Log.d("Main", "$conversionRateOne")
                         //Log.d("Main", "$conversionRateTwo")
                         //Log.d("Main", "$conversionRate")
                         //Log.d("Main", apiResult)
-                        //this Coroutine takes the data from the input boss and multiplies it
-                        //by the conversion rate and displays inside the output box
                         runOnUiThread() {
+                            //Removes the error message if one is present
                             if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
                                 binding.textViewWarning.text = ""
                             }
+                            //Calculates the converted rate and displays it to user
                             val text = ((binding.editTextConversionFrom.text.toString()
                                 .toFloat()) * conversionRate).toString()
                             binding.editTextConversionTo?.setText(text)
-
+                            //Displays the conversion rate to the user
                             if (conversionRate != null) {
                                 binding.textView2.text = conversionRate.toString()
                             }
@@ -96,6 +99,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                         //catches the error and prints it to the screen
                         Log.e("Main", "$e")
                         runOnUiThread {
+                            //If no internet connection, alerts user
                             if (e.toString().contains("java.net.UnknownHostException", true)) {
                                 binding.textViewWarning.text = "Please check internet connection"
                                 enableButton(buttonConvert)
