@@ -74,16 +74,16 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     //by the conversion rate and displays inside the output box
                     runOnUiThread() {
                         if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
-                            clearTextView(binding.textViewWarning)
-                        } else {
-                            val text = ((binding.editTextConversionFrom.text.toString()
-                                .toFloat()) * conversionRate).toString()
-                            binding.editTextConversionTo?.setText(text)
-
-                            if (conversionRate != null) {
-                                binding.textView2.text = conversionRate.toString()
-                            }
+                            binding.textViewWarning.text = ""
                         }
+                        val text = ((binding.editTextConversionFrom.text.toString()
+                            .toFloat()) * conversionRate).toString()
+                        binding.editTextConversionTo?.setText(text)
+
+                        if (conversionRate != null) {
+                            binding.textView2.text = conversionRate.toString()
+                        }
+
                     }
                 }
             }
