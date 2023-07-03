@@ -4,15 +4,12 @@ package ucm.co5225.j96000
 //The spinner item (TRN) TRON is not a valid part of the API and will give an invalid response
 //This is left in to test the error functionality
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.*
 import ucm.co5225.j96000.databinding.ActivityMainBinding
 import org.json.JSONObject
 import java.net.URL
