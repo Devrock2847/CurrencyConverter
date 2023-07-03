@@ -10,13 +10,14 @@
     <string-array name="CurrenciesOne">
         <item>(BTC) Bitcoin</item>
         <item>(ETH) Ethereum</item>
-        <item>(TRX) TRON</item>
+        <item>(XRP) XRP</item>
         <item>(DOT) Polkadot</item>
     </string-array>
     <string-array name="CurrenciesTwo">
         <item>(ETH) Ethereum</item>
         <item>(BTC) Bitcoin</item>
-        <item>(TRX) TRON</item>
+        <item>(XRP) XRP</item>
         <item>(DOT) Polkadot</item>
+        <item>(TRX) TRON</item>
     </string-array>
 </resources>

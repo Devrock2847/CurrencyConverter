@@ -1,5 +1,9 @@
 package ucm.co5225.j96000
 
+//PLEASE READ!!!
+//The spinner item (TRN) TRON is not a valid part of the API and will give an invalid response
+//This is left in to test the error functionality
+
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,6 +56,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                 if (baseCurrencyOne == baseCurrencyTwo) {
                     runOnUiThread {
                         binding.textViewWarning.text = "Please select a currency to convert"
+                        enableButton(buttonConvert)
                     }
                     //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
@@ -85,7 +90,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                             if (conversionRate != null) {
                                 binding.textView2.text = conversionRate.toString()
                             }
-
+                            enableButton(buttonConvert)
                         }
                     } catch(e: Exception){
                         //catches the error and prints it to the screen
@@ -93,8 +98,10 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                         runOnUiThread {
                             if (e.toString().contains("java.net.UnknownHostException", true)) {
                                 binding.textViewWarning.text = "Please check internet connection"
+                                enableButton(buttonConvert)
                             } else {
                                 binding.textViewWarning.text = "No response from API, try again"
+                                enableButton(buttonConvert)
                             }
                         }
                     }
@@ -103,21 +110,22 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         }
         thread.start()
         Thread.sleep(500)
-        enableButton(buttonConvert)
     }
     private fun clearTextView(view: View) {
-        //functionality for the clear button
+        //Removes text from the conversion boxes for a clean UI
         disableButton(buttonClear)
         binding.editTextConversionTo.setText("")
         binding.editTextConversionFrom.setText("")
         enableButton(buttonClear)
     }
     private fun disableButton(button: Button) {
+        //Disables a button making it un-clickable whilst changing it's color to grey so it is clear to the user
         button?.isEnabled = false
         button?.setTextColor(ContextCompat.getColor(button.context, R.color.black))
         button?.setBackgroundColor(ContextCompat.getColor(button.context, R.color.teal_200))
     }
     private fun enableButton(button: Button) {
+        //Enables a button making it clickable and changing it's colors back to it's original
         button?.isEnabled = true
         button?.setTextColor(ContextCompat.getColor(button.context, R.color.white))
         button?.setBackgroundColor(ContextCompat.getColor(button.context, R.color.purple_700))
