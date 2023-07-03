@@ -55,35 +55,48 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     }
                     //binding.textViewWarning.setText("Please select a currency to convert")
                 } else {
-                    //attempts to read from the api
-                    val apiResult = URL(api).readText()
-                    val jsonObject = JSONObject(apiResult)
-                    //pulls the conversion rate from the api call object
-                    conversionRateOne =
-                        jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
-                            .getString("value").toFloat()
-                    conversionRateTwo =
-                        jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
-                            .getString("value").toFloat()
-                    conversionRate = conversionRateOne / conversionRateTwo * 10
-                    //Log.d("Main", "$conversionRateOne")
-                    //Log.d("Main", "$conversionRateTwo")
-                    //Log.d("Main", "$conversionRate")
-                    //Log.d("Main", apiResult)
-                    //this Coroutine takes the data from the input boss and multiplies it
-                    //by the conversion rate and displays inside the output box
-                    runOnUiThread() {
-                        if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
-                            binding.textViewWarning.text = ""
-                        }
-                        val text = ((binding.editTextConversionFrom.text.toString()
-                            .toFloat()) * conversionRate).toString()
-                        binding.editTextConversionTo?.setText(text)
+                    try {
+                        //attempts to read from the api
+                        val apiResult = URL(api).readText()
+                        val jsonObject = JSONObject(apiResult)
+                        //Log.d("fail", "fail on $response")
+                        //pulls the conversion rate from the api call object
+                        conversionRateOne =
+                            jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyOne")
+                                .getString("value").toFloat()
+                        conversionRateTwo =
+                            jsonObject.getJSONObject("rates").getJSONObject("$baseCurrencyTwo")
+                                .getString("value").toFloat()
+                        conversionRate = conversionRateOne / conversionRateTwo * 10
+                        //Log.d("Main", "$conversionRateOne")
+                        //Log.d("Main", "$conversionRateTwo")
+                        //Log.d("Main", "$conversionRate")
+                        //Log.d("Main", apiResult)
+                        //this Coroutine takes the data from the input boss and multiplies it
+                        //by the conversion rate and displays inside the output box
+                        runOnUiThread() {
+                            if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
+                                binding.textViewWarning.text = ""
+                            }
+                            val text = ((binding.editTextConversionFrom.text.toString()
+                                .toFloat()) * conversionRate).toString()
+                            binding.editTextConversionTo?.setText(text)
 
-                        if (conversionRate != null) {
-                            binding.textView2.text = conversionRate.toString()
-                        }
+                            if (conversionRate != null) {
+                                binding.textView2.text = conversionRate.toString()
+                            }
 
+                        }
+                    } catch(e: Exception){
+                        //catches the error and prints it to the screen
+                        Log.e("Main", "$e")
+                        runOnUiThread {
+                            if (e.toString().contains("java.net.UnknownHostException", true)) {
+                                binding.textViewWarning.text = "Please check internet connection"
+                            } else {
+                                binding.textViewWarning.text = "No response from API, try again"
+                            }
+                        }
                     }
                 }
             }
