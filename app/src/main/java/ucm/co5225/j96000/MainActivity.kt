@@ -53,10 +53,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         val thread = Thread {
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
                 //This stops the program crashing when no value is selected
-                runOnUiThread {
-                    binding.textViewWarning.text = "Please enter a value to convert"
-                    enableButton(buttonConvert)
-                }
                 if (baseCurrencyOne == baseCurrencyTwo) {
                     runOnUiThread {
                         binding.textViewWarning.text = "Please select a currency to convert"
@@ -109,6 +105,11 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                             }
                         }
                     }
+                }
+            } else {
+                runOnUiThread {
+                    binding.textViewWarning.text = "Please enter a value to convert"
+                    enableButton(buttonConvert)
                 }
             }
         }
