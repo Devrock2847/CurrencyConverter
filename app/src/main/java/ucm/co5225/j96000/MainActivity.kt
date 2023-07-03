@@ -48,8 +48,9 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
     private fun getApiResult(view: View) {
         disableButton(buttonConvert)
         val thread = Thread {
+            //if user has input a value
             if (binding.editTextConversionFrom != null && binding.editTextConversionFrom.text.isNotEmpty() && binding.editTextConversionFrom.text.isNotBlank()) {
-                //This stops the program crashing when no value is selected
+                //If both currencies are the same the user is asked to change a currency
                 if (baseCurrencyOne == baseCurrencyTwo) {
                     runOnUiThread {
                         binding.textViewWarning.text = "Please select a currency to convert"
@@ -69,11 +70,8 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                                 .getString("value").toFloat()
                         //Calculates the conversion rate of the 2 values
                         conversionRate = conversionRateOne / conversionRateTwo * 10
-                        //Log.d("Main", "$conversionRateOne")
-                        //Log.d("Main", "$conversionRateTwo")
-                        //Log.d("Main", "$conversionRate")
-                        //Log.d("Main", apiResult)
-                        runOnUiThread() {
+
+                        runOnUiThread {
                             //Removes the error message if one is present
                             if (binding.textViewWarning.text.isNotBlank() || binding.textViewWarning.text.isNotEmpty()) {
                                 binding.textViewWarning.text = ""
@@ -89,7 +87,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                             enableButton(buttonConvert)
                         }
                     } catch(e: Exception){
-                        //catches the error and prints it to the screen
+                        //Catches the error and prints it to the screen
                         Log.e("Main", "$e")
                         runOnUiThread {
                             //If no internet connection, alerts user
@@ -104,6 +102,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     }
                 }
             } else {
+                //If no value is entered
                 runOnUiThread {
                     binding.textViewWarning.text = "Please enter a value to convert"
                     enableButton(buttonConvert)
