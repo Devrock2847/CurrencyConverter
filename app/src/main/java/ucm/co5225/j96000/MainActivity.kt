@@ -1,7 +1,7 @@
 package ucm.co5225.j96000
 
 //PLEASE READ!!!
-//The spinner item (TRN) TRON is not a valid part of the API and will give an invalid response
+//The second spinner has an item (TRN) TRON which is not a valid part of the API and will give an invalid response
 //This is left in to test the error functionality
 
 import androidx.appcompat.app.AppCompatActivity
