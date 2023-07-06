@@ -53,6 +53,7 @@
                     android:layout_height="36dp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linearLayoutConversionTo"
                 android:layout_width="300sp"
